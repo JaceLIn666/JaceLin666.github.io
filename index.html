@@ -13,11 +13,6 @@ body{
     width:100%;
     display:block;
     margin-bottom:10px;
-    filter: blur(12px);
-    transition: filter 0.2s ease-out;
-}
-#box img.show{
-    filter: blur(0px);
 }
 </style>
 </head>
@@ -55,31 +50,13 @@ const pics = [
 "images/p28.png",
 ];
 const box=document.getElementById("box");
-const imgArr=[];
 
-// 生成全部图片
 pics.forEach(s=>{
     let img=new Image();
     img.src=s;
+    img.loading="lazy";
     box.appendChild(img);
-    imgArr.push(img);
 })
-
-// 监听滚动，判断图片是否进入屏幕
-function checkInView(){
-    imgArr.forEach(img=>{
-        const rect=img.getBoundingClientRect();
-        // 图片顶部进入屏幕范围就触发动画
-        if(rect.top < window.innerHeight * 0.85){
-            img.classList.add('show');
-        }else{
-            img.classList.remove('show');
-        }
-    })
-}
-
-window.addEventListener('scroll',checkInView);
-window.addEventListener('load',checkInView);
 </script>
 </body>
 </html>
