@@ -49,14 +49,23 @@ const pics = [
 "images/p27.png",
 "images/p28.png",
 ];
-const box=document.getElementById("box");
+const box = document.getElementById("box");
+let index = 0;
 
-pics.forEach(s=>{
-    let img=new Image();
-    img.src=s;
-    img.loading="lazy";
+// 递归：当前图片加载成功后再加载下一张
+function loadNext(){
+    if(index >= pics.length) return;
+    const img = new Image();
+    img.src = pics[index];
+    img.loading = "lazy";
     box.appendChild(img);
-})
+    index++;
+    // 加载完成触发下一张
+    img.onload = loadNext;
+    // 异常报错也继续下一张，防止卡死
+    img.onerror = loadNext;
+}
+loadNext();
 </script>
 </body>
 </html>
