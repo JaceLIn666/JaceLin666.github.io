@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>作品集</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    background:#ffffff;
+}
+#box img{
+    width:100%;
+    display:block;
+    margin-bottom:10px;
+    filter: blur(12px);
+    transition: filter 0.2s ease-out;
+}
+#box img.show{
+    filter: blur(0px);
+}
+</style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+const pics = [
+"images/p1.png",
+"images/p2.png",
+"images/p3.png",
+"images/p4.png",
+"images/p5.png",
+"images/p6.png",
+"images/p7.png",
+"images/p8.png",
+"images/p9.png",
+"images/p10.png",
+"images/p11.png",
+"images/p12.png",
+"images/p13.png",
+"images/p14.png",
+"images/p15.png",
+"images/p16.png",
+"images/p17.png",
+"images/p18.png",
+"images/p19.png",
+"images/p20.png",
+"images/p21.png",
+"images/p22.png",
+"images/p23.png",
+"images/p24.png",
+"images/p25.png",
+"images/p26.png",
+"images/p27.png",
+"images/p28.png",
+];
+const box=document.getElementById("box");
+const imgArr=[];
+
+// 生成全部图片
+pics.forEach(s=>{
+    let img=new Image();
+    img.src=s;
+    box.appendChild(img);
+    imgArr.push(img);
+})
+
+// 监听滚动，判断图片是否进入屏幕
+function checkInView(){
+    imgArr.forEach(img=>{
+        const rect=img.getBoundingClientRect();
+        // 图片顶部进入屏幕范围就触发动画
+        if(rect.top < window.innerHeight * 0.85){
+            img.classList.add('show');
+        }else{
+            img.classList.remove('show');
+        }
+    })
+}
+
+window.addEventListener('scroll',checkInView);
+window.addEventListener('load',checkInView);
+</script>
+</body>
+</html>
